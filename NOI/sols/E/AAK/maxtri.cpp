@@ -1,0 +1,101 @@
+#include <iostream>
+using namespace std;
+int main (){
+long long cifra1,cifra2,cifra3;
+cin>>cifra1;
+cin>>cifra2;
+cin>>cifra3;
+if(cifra1>cifra2){
+    if(cifra1>cifra3){
+        cout<<cifra1;
+        if(cifra2>cifra3){
+            cout<<cifra2<<cifra3;
+        }else{
+        cout<<cifra3<<cifra2;
+        }
+    }else{
+    cout<<cifra3<<cifra1<<cifra2;
+}
+}else{
+if(cifra1>cifra3){
+    cout<<cifra2<<cifra1<<cifra3;
+}else{
+if(cifra2<cifra3){
+    cout<<cifra3<<cifra2;
+}else{
+cout<<cifra2<<cifra3;
+}
+cout<<cifra1;
+}
+}if(cifra1>cifra2){}else{
+if(cifra1>cifra3){
+    if(cifra1>cifra2){
+      cout<<cifra1;
+      if(cifra2>cifra3){
+        cout<<cifra2<<cifra3;
+      }else{
+      cout<<cifra3<<cifra2;
+      }
+    }else{
+        cout<<cifra2<<cifra1<<cifra3;
+    }
+}else{
+if(cifra1>cifra2){
+    cout<<cifra3<<cifra1<<cifra2;
+}else{
+    if(cifra2>cifra3){
+        cout<<cifra2<<cifra3;
+    }else{
+    cout<<cifra3<<cifra2;
+    }
+cout<<cifra1;
+}
+}
+}
+if(cifra1>cifra3){
+        }else{
+if(cifra2>cifra3){
+    if(cifra2>cifra1){
+        cout<<cifra2;
+        if(cifra1>cifra2){
+            cout<<cifra1<<cifra2;
+        }else{
+        cout<<cifra2<<cifra1;
+        }
+    }else{
+    cout<<cifra1<<cifra2<<cifra3;
+    }
+}else{
+if(cifra2<cifra1){
+        if(cifra1>cifra2){
+            cout<<cifra1<<cifra2;
+        }else{
+        cout<<cifra2<<cifra1;
+        }
+    cout<<cifra2;
+}
+}
+        }
+if(cifra1==cifra2){
+    if(cifra3>cifra2){
+        cout<<cifra3<<cifra1<<cifra2;
+    }else{
+    cout<<cifra1<<cifra2<<cifra3;
+    }
+}
+if(cifra1==cifra3){
+    if(cifra1>cifra2){
+    cout<<cifra1<<cifra3<<cifra2;
+    }else{
+    cout<<cifra2<<cifra1<<cifra3;
+    }
+}
+if(cifra3==cifra2){
+    if(cifra1>cifra2){
+        cout<<cifra1<<cifra2<<cifra3;
+    }else{
+    cout<<cifra2<<cifra3<<cifra1;
+    }
+}
+return 0;
+}

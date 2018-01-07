@@ -1,0 +1,69 @@
+#!/bin/bash
+
+for group in A B C D E;
+do
+	echo "$group:";
+	tasks="`ls ./tests/$group/ | sed -r 's/^.{3}//'`"
+	for person in `ls -d ./sols/$group/*` ;
+	do
+		points=0
+		printf "$person\t"
+		for task in $tasks ; 
+		do
+			printf "$task\t"
+			if [ -f $person/$task.cpp ]
+			then
+				testsTotal=0
+				testsCorrect=0
+				g++ -O2 -Wall -lm -static -std=c++11 $person/$task.cpp -o /tmp/exe 2> /dev/null;
+				for inFile in `ls -d ./tests/$group/$group*_$task/tests/*.in` ;
+				do
+					outFile=${inFile%.*}.sol
+					ulimit -Sv 256000;
+					timeout 1s /tmp/exe < $inFile > /tmp/out 2> /dev/null;
+					code=$?
+					#echo $code
+					if [[ "$code" -eq "1" ]]
+					then
+						printf "ML\t"
+					else
+						if [[ "$code" -eq "127" ]]
+						then
+							printf "TL\t"
+						else
+							if [[ "$code" -eq "0" ]]
+							then
+								diff -w /tmp/out $outFile > /tmp/log 2> /dev/null
+								if [[ "`cat /tmp/log`" != "" ]]
+								then
+									printf "WA\t"
+								else
+									printf "OK\t"
+									testsCorrect=$(($testsCorrect + 1))
+								fi
+							else
+								printf "EC$code\t"
+							fi
+						fi
+					fi
+					ulimit -Sv 4000000;
+					testsTotal=$(($testsTotal + 1))
+					rm /tmp/out /tmp/log
+				done
+				rm /tmp/exe
+				pointsTask=$((100 * $testsCorrect / $testsTotal));
+				printf "$pointsTask\t"
+				points=$(($points + $pointsTask))
+			else
+				for _ in `ls -d ./tests/$group/$group*_$task/tests/*.in` ;
+				do
+					printf "NF\t"
+				done
+				printf "0\t"
+			fi
+		done
+		printf "$points"
+		echo "";
+	done
+done
+
